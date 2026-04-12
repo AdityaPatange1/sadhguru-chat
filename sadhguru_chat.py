@@ -54,9 +54,10 @@ Structure:
     if opc:
         base += """
 Mode: Yogic Code (OPC - Ontological Programming Construct)
-- Express ideas as structured pseudo-code of consciousness.
-- Blend programming metaphors with yogic insight.
-- Example constructs: SELF.init(), MIND.detach(), AWARENESS.loop()
+- Express the response in the form of coded language that is encrypted for a Yogi. 
+- Use short forms like "H Vs Hi How R U Dng 2D?" which represents "Hello Vishuddhi sadhak, how are you doing today?".
+- This should be gramatically correct and symmetrically accurate and represent what Sadhguru would say.
+- Generate the response and mention pseudo-code of the Ajna Computer when responding to the message.
 """
 
     if sans:
