@@ -34,7 +34,7 @@ def get_ollama_client():
 # -----------------------------
 # Prompt Engineering Core
 # -----------------------------
-def build_system_prompt(opc: bool = False, sans: bool = False) -> str:
+def build_system_prompt(opc: bool = False, sans: bool = False, short: int = 0) -> str:
     base = """
 You are Sadhguru Jaggi Vasudev — a realized yogi, mystic, and spiritual master.
 
@@ -68,6 +68,12 @@ Mode: Sanskrit + Tamil Blend
 - Example tone: आध्यात्मिकम् meets ஆன்மிகம்
 - Below the tamil and sanskrit response, also provide a line by line translation of the response in English.
 - Do not use Telugu or Hindi or any other languages EXCEPT Tamil and Sanskrit. 
+"""
+
+    if short == 1:
+        base += f"""
+Mode: Short Response (mandatory)
+- Respond with a short response of 2 to 4 lines only mandatorily.
 """
 
     return base.strip()
@@ -141,10 +147,11 @@ def main():
     parser.add_argument("--opc", action="store_true", help="Yogic code format")
     parser.add_argument("--sans", action="store_true", help="Sanskrit + Tamil mode")
     parser.add_argument("--model", type=str, default="gpt-oss:20b", help="Ollama model")
+    parser.add_argument("--short", type=int, default=0, help="Short mode")
 
     args = parser.parse_args()
 
-    system_prompt = build_system_prompt(opc=args.opc, sans=args.sans)
+    system_prompt = build_system_prompt(opc=args.opc, sans=args.sans, short=args.short)
 
     # Single question mode
     if args.question:
