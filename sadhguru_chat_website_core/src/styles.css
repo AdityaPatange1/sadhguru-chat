@@ -1,16 +1,52 @@
 :root {
+  /* Defaults match themes.json “Sage Grove” light until initTheme runs */
   --bg-top: #f6f9f4;
   --bg-mid: #fffef5;
+  --bg-end: #eef7ea;
+  --glow-1: #f0ffe8;
+  --glow-2: #fff8dc;
+  --glow-hi: rgba(233, 196, 106, 0.35);
   --ink: #121814;
   --ink-muted: #3d4a3a;
+  --black: #0a0f0c;
   --green: #2d6a4f;
   --green-soft: #8fcf7a;
   --green-faint: #d8f0cf;
+  --green-deep: #1b4332;
   --yellow: #e9c46a;
   --yellow-soft: #fff3c8;
-  --black: #0a0f0c;
+  --yellow-deep: #eab308;
+  --surface: #ffffff;
   --card: rgba(255, 255, 255, 0.82);
   --shadow: 0 18px 50px rgba(10, 22, 12, 0.08);
+  --shadow-card: 0 10px 30px rgba(10, 22, 12, 0.05);
+  --nav-pill: rgba(255, 255, 255, 0.55);
+  --nav-active-end: #ffffff;
+  --warn-bg: linear-gradient(90deg, #fff4d6, #fffbeb);
+  --warn-fg: #5c4a1a;
+  --warn-border: rgba(233, 196, 106, 0.55);
+  --chat-bg-a: #f8fff4;
+  --chat-bg-b: #ffffff;
+  --assistant-accent: #b8860b;
+  --focus-ring: rgba(143, 207, 122, 0.55);
+  --error: #8b2942;
+  --code-bg: #0a0f0c;
+  --code-fg: #e8f5e9;
+  --code-border: rgba(143, 207, 122, 0.25);
+  --landing-soft: linear-gradient(
+      180deg,
+      rgba(255, 254, 248, 0.95),
+      rgba(216, 240, 207, 0.35)
+    ),
+    radial-gradient(800px 400px at 20% 30%, rgba(233, 196, 106, 0.2) 0%, transparent 55%);
+  --landing-mist: linear-gradient(165deg, #f8fff4 0%, #fffef5 40%, #e8f5e9 100%);
+  --landing-dark-bg: linear-gradient(145deg, #0f1612 0%, #1a2820 50%, #0d1a14 100%);
+  --landing-dark-text: #e3ece6;
+  --landing-dark-muted: #c5d4c8;
+  --landing-dark-heading: #f0fff4;
+  --landing-closing: linear-gradient(180deg, transparent, rgba(233, 196, 106, 0.12));
+  --table-head: rgba(216, 240, 207, 0.35);
+  --invert-fg: #e8f5e9;
   --radius: 16px;
   --font: "DM Sans", system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
@@ -26,10 +62,18 @@ html {
   scroll-behavior: smooth;
 }
 
+html[data-color-mode="light"] {
+  color-scheme: light;
+}
+
+html[data-color-mode="dark"] {
+  color-scheme: dark;
+}
+
 .boot-err {
   padding: 2rem;
   font-family: var(--font);
-  color: #8b2942;
+  color: var(--error);
 }
 
 body {
@@ -37,9 +81,9 @@ body {
   min-height: 100vh;
   font-family: var(--font);
   color: var(--ink);
-  background: radial-gradient(1200px 800px at 10% -10%, #f0ffe8 0%, transparent 55%),
-    radial-gradient(900px 600px at 90% 0%, #fff8dc 0%, transparent 50%),
-    linear-gradient(165deg, var(--bg-top), var(--bg-mid) 45%, #eef7ea);
+  background: radial-gradient(1200px 800px at 10% -10%, var(--glow-1) 0%, transparent 55%),
+    radial-gradient(900px 600px at 90% 0%, var(--glow-2) 0%, transparent 50%),
+    linear-gradient(165deg, var(--bg-top), var(--bg-mid) 45%, var(--bg-end));
 }
 
 .skip-link {
@@ -64,13 +108,109 @@ body {
 
 .top {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.25rem;
+  flex-direction: column;
+  gap: 1.1rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(45, 106, 79, 0.15);
+  border-bottom: 1px solid color-mix(in srgb, var(--green) 22%, transparent);
+}
+
+.top__nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.theme-bar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.theme-bar__mode {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--green) 28%, transparent);
+  background: var(--nav-pill);
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.theme-bar__mode:hover {
+  border-color: color-mix(in srgb, var(--yellow) 55%, transparent);
+  background: var(--surface);
+}
+
+.theme-panel {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 80;
+  min-width: min(320px, 92vw);
+  max-width: 420px;
+  max-height: min(70vh, 520px);
+  overflow: auto;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.theme-panel__title {
+  margin: 0 0 0.65rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+
+.theme-chip {
+  text-align: left;
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--green) 15%, transparent);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.theme-chip:hover {
+  border-color: color-mix(in srgb, var(--green) 35%, transparent);
+}
+
+.theme-chip.is-active {
+  border-color: color-mix(in srgb, var(--yellow) 65%, transparent);
+  background: linear-gradient(135deg, var(--yellow-soft), var(--nav-active-end));
+  color: var(--black);
+  font-weight: 600;
+}
+
+.btn--compact {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
 }
 
 .brand {
@@ -113,7 +253,7 @@ body {
 
 .nav__btn {
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--nav-pill);
   color: var(--ink-muted);
   font: inherit;
   font-size: 0.9rem;
@@ -125,14 +265,14 @@ body {
 
 .nav__btn:hover {
   color: var(--green);
-  border-color: rgba(45, 106, 79, 0.25);
+  border-color: color-mix(in srgb, var(--green) 28%, transparent);
 }
 
 .nav__btn.is-active {
   color: var(--black);
-  background: linear-gradient(135deg, var(--yellow-soft), #fff);
-  border-color: rgba(233, 196, 106, 0.6);
-  box-shadow: 0 4px 14px rgba(233, 196, 106, 0.25);
+  background: linear-gradient(135deg, var(--yellow-soft), var(--nav-active-end));
+  border-color: color-mix(in srgb, var(--yellow) 55%, transparent);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--yellow) 28%, transparent);
 }
 
 .main {
@@ -166,17 +306,18 @@ body {
 }
 
 .banner--warn {
-  background: linear-gradient(90deg, #fff4d6, #fffbeb);
-  border: 1px solid rgba(233, 196, 106, 0.55);
-  color: #5c4a1a;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  color: var(--warn-fg);
 }
 
 .panel {
   background: var(--card);
   border-radius: calc(var(--radius) + 4px);
-  border: 1px solid rgba(45, 106, 79, 0.12);
+  border: 1px solid color-mix(in srgb, var(--green) 16%, transparent);
   box-shadow: var(--shadow);
   padding: 1.35rem 1.35rem 1.5rem;
+  margin: 1rem;
   backdrop-filter: blur(8px);
 }
 
@@ -223,8 +364,8 @@ body {
   font: inherit;
   padding: 0.5rem 0.65rem;
   border-radius: 10px;
-  border: 1px solid rgba(45, 106, 79, 0.2);
-  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--green) 28%, transparent);
+  background: var(--surface);
   color: var(--ink);
 }
 
@@ -259,7 +400,7 @@ body {
 }
 
 .status[data-kind="err"] {
-  color: #8b2942;
+  color: var(--error);
 }
 
 .status[data-kind="load"] {
@@ -275,8 +416,8 @@ body {
   overflow-y: auto;
   padding: 0.75rem;
   border-radius: 12px;
-  background: linear-gradient(180deg, #f8fff4, #fff);
-  border: 1px solid rgba(45, 106, 79, 0.1);
+  background: linear-gradient(180deg, var(--chat-bg-a), var(--chat-bg-b));
+  border: 1px solid color-mix(in srgb, var(--green) 14%, transparent);
   margin-bottom: 0.75rem;
 }
 
@@ -302,7 +443,7 @@ body {
 }
 
 .msg--assistant .msg__label {
-  color: #b8860b;
+  color: var(--assistant-accent);
 }
 
 .msg__body {
@@ -325,12 +466,12 @@ body {
   font: inherit;
   padding: 0.55rem 0.75rem;
   border-radius: 12px;
-  border: 1px solid rgba(18, 24, 20, 0.12);
-  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  background: var(--surface);
 }
 
 .chat-input:focus {
-  outline: 2px solid rgba(143, 207, 122, 0.55);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 1px;
 }
 
@@ -354,15 +495,15 @@ body {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--green), #1b4332);
-  color: #f4fff8;
-  box-shadow: 0 8px 20px rgba(27, 67, 50, 0.25);
+  background: linear-gradient(135deg, var(--green), var(--green-deep));
+  color: var(--surface);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--green-deep) 45%, transparent);
 }
 
 .btn--accent {
-  background: linear-gradient(135deg, var(--yellow), #eab308);
+  background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
   color: var(--black);
-  box-shadow: 0 8px 20px rgba(233, 196, 106, 0.35);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--yellow) 38%, transparent);
 }
 
 .grid {
@@ -379,9 +520,9 @@ body {
 .card {
   padding: 1.1rem 1.15rem;
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(45, 106, 79, 0.1);
-  box-shadow: 0 10px 30px rgba(10, 22, 12, 0.05);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--green) 12%, transparent);
+  box-shadow: var(--shadow-card);
 }
 
 .card__title {
@@ -427,21 +568,89 @@ body {
   margin: 0 0 1rem;
   padding: 1rem 1.1rem;
   border-radius: 12px;
-  background: var(--black);
-  color: #e8f5e9;
+  background: var(--code-bg);
+  color: var(--code-fg);
   overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.5;
-  border: 1px solid rgba(143, 207, 122, 0.25);
+  border: 1px solid var(--code-border);
 }
 
 .foot {
   margin-top: 2.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(45, 106, 79, 0.12);
+  border-top: 1px solid color-mix(in srgb, var(--green) 16%, transparent);
   font-size: 0.82rem;
   color: var(--ink-muted);
   text-align: center;
+}
+
+.foot__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem 0.85rem;
+}
+
+.foot__github {
+  display: inline-flex;
+  color: var(--green);
+  line-height: 0;
+  border-radius: 10px;
+  padding: 0.25rem;
+  transition: color 0.15s, background 0.15s;
+}
+
+.foot__github:hover {
+  color: var(--green-deep);
+  background: color-mix(in srgb, var(--green) 12%, transparent);
+}
+
+.foot__github-icon {
+  display: block;
+}
+
+.foot__text {
+  margin: 0;
+  max-width: 52ch;
+  line-height: 1.5;
+}
+
+.text-link {
+  color: var(--green);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.text-link:hover {
+  color: var(--green-deep);
+}
+
+.text-link--on-dark {
+  color: var(--green-soft);
+}
+
+.text-link--on-dark:hover {
+  color: var(--yellow-soft);
+}
+
+.hero__source {
+  margin: 0.75rem 0 0;
+  font-size: 0.92rem;
+}
+
+.landing__hero-source {
+  margin: 1.25rem 0 0;
+  font-size: 0.92rem;
+}
+
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .visually-hidden {
@@ -484,9 +693,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 3rem 1.25rem 4rem;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, #f0ffe8 0%, transparent 55%),
-    radial-gradient(ellipse 70% 50% at 100% 20%, rgba(233, 196, 106, 0.35) 0%, transparent 50%),
-    linear-gradient(180deg, #f6f9f4 0%, #fffef8 55%, #eef7ea 100%);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--glow-1) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 20%, var(--glow-hi) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--surface) 55%, var(--bg-end) 100%);
 }
 
 .landing__band--parallax {
@@ -515,7 +724,12 @@ body {
   height: min(420px, 70vw);
   left: -8%;
   top: 8%;
-  background: radial-gradient(circle at 30% 30%, #fff3c8, rgba(143, 207, 122, 0.45) 45%, transparent 70%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--yellow-soft),
+    color-mix(in srgb, var(--green-soft) 45%, transparent) 45%,
+    transparent 70%
+  );
 }
 
 .landing__orb--2 {
@@ -523,7 +737,12 @@ body {
   height: min(280px, 45vw);
   right: -5%;
   top: 22%;
-  background: radial-gradient(circle at 70% 40%, #d8f0cf, rgba(45, 106, 79, 0.25) 50%, transparent 72%);
+  background: radial-gradient(
+    circle at 70% 40%,
+    var(--green-faint),
+    color-mix(in srgb, var(--green) 28%, transparent) 50%,
+    transparent 72%
+  );
 }
 
 .landing__orb--3 {
@@ -531,7 +750,11 @@ body {
   height: min(200px, 35vw);
   left: 38%;
   bottom: 6%;
-  background: radial-gradient(circle at 50% 50%, rgba(233, 196, 106, 0.5), transparent 65%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--yellow) 55%, transparent),
+    transparent 65%
+  );
 }
 
 .landing__hero-inner {
@@ -580,15 +803,15 @@ body {
 }
 
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.75);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
   color: var(--green);
-  border: 1px solid rgba(45, 106, 79, 0.35);
-  box-shadow: 0 4px 16px rgba(10, 22, 12, 0.06);
+  border: 1px solid color-mix(in srgb, var(--green) 38%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--black) 8%, transparent);
 }
 
 .btn--ghost:hover {
-  border-color: rgba(233, 196, 106, 0.85);
-  background: linear-gradient(135deg, #fff, var(--yellow-soft));
+  border-color: color-mix(in srgb, var(--yellow) 58%, transparent);
+  background: linear-gradient(135deg, var(--surface), var(--yellow-soft));
 }
 
 .landing__section {
@@ -602,26 +825,21 @@ body {
 }
 
 .landing__band {
-  border-top: 1px solid rgba(45, 106, 79, 0.1);
-  border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+  border-top: 1px solid color-mix(in srgb, var(--green) 12%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--green) 10%, transparent);
 }
 
 .landing__band--soft {
-  background: linear-gradient(
-      180deg,
-      rgba(255, 254, 248, 0.95),
-      rgba(216, 240, 207, 0.35)
-    ),
-    radial-gradient(800px 400px at 20% 30%, rgba(233, 196, 106, 0.2) 0%, transparent 55%);
+  background: var(--landing-soft);
 }
 
 .landing__band--mist {
-  background: linear-gradient(165deg, #f8fff4 0%, #fffef5 40%, #e8f5e9 100%);
+  background: var(--landing-mist);
 }
 
 .landing__band--dark {
-  background: linear-gradient(145deg, #0f1612 0%, #1a2820 50%, #0d1a14 100%);
-  color: #e3ece6;
+  background: var(--landing-dark-bg);
+  color: var(--landing-dark-text);
   border: none;
 }
 
@@ -633,7 +851,7 @@ body {
 }
 
 .landing__h2--on-dark {
-  color: #f0fff4;
+  color: var(--landing-dark-heading);
 }
 
 .landing__h3 {
@@ -652,7 +870,7 @@ body {
 
 .landing__band--dark .landing__lead,
 .landing__band--dark .landing__note {
-  color: #c5d4c8;
+  color: var(--landing-dark-muted);
 }
 
 .landing__list {
@@ -690,9 +908,9 @@ body {
 .landing__feature {
   padding: 1.1rem 1.15rem;
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(45, 106, 79, 0.12);
-  box-shadow: 0 12px 36px rgba(10, 22, 12, 0.06);
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  border: 1px solid color-mix(in srgb, var(--green) 14%, transparent);
+  box-shadow: var(--shadow-card);
 }
 
 .landing__feature p {
@@ -706,15 +924,15 @@ body {
   margin: 0 0 1rem;
   padding-left: 1.2rem;
   line-height: 1.7;
-  color: #c5d4c8;
+  color: var(--landing-dark-muted);
 }
 
 .landing__steps code {
   font-size: 0.88em;
   padding: 0.1em 0.35em;
   border-radius: 6px;
-  background: rgba(143, 207, 122, 0.15);
-  color: #e8f5e9;
+  background: color-mix(in srgb, var(--green-soft) 22%, transparent);
+  color: var(--invert-fg);
 }
 
 .landing__note {
@@ -724,7 +942,7 @@ body {
 }
 
 .landing__note--on-dark {
-  color: #a8bdb0;
+  color: color-mix(in srgb, var(--landing-dark-muted) 92%, var(--landing-dark-text));
 }
 
 .code-block--inline {
@@ -734,8 +952,8 @@ body {
 .landing__table-wrap {
   overflow-x: auto;
   border-radius: 12px;
-  border: 1px solid rgba(45, 106, 79, 0.15);
-  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid color-mix(in srgb, var(--green) 20%, transparent);
+  background: color-mix(in srgb, var(--surface) 58%, transparent);
 }
 
 .landing__table {
@@ -748,14 +966,14 @@ body {
 .landing__table td {
   padding: 0.85rem 1rem;
   text-align: left;
-  border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+  border-bottom: 1px solid color-mix(in srgb, var(--green) 12%, transparent);
   vertical-align: top;
 }
 
 .landing__table th {
   font-weight: 600;
   color: var(--green);
-  background: rgba(216, 240, 207, 0.35);
+  background: var(--table-head);
 }
 
 .landing__table tbody tr:last-child th,
@@ -770,7 +988,7 @@ body {
 .landing__closing {
   padding: 3rem 1.25rem 4rem;
   text-align: center;
-  background: linear-gradient(180deg, transparent, rgba(233, 196, 106, 0.12));
+  background: var(--landing-closing);
 }
 
 .landing__closing-text {

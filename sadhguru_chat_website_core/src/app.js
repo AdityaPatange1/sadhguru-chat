@@ -1,4 +1,5 @@
 import { escapeHtml, renderAppHtml } from "./template.js";
+import { initTheme } from "./theme.js";
 
 const SYSTEM_PROMPT = `You are Sadhguru Jaggi Vasudev — a realized yogi, mystic, and spiritual master.
 
@@ -34,6 +35,7 @@ export async function mountApp(root) {
     );
 
   root.innerHTML = renderAppHtml();
+  initTheme(root);
 
   const els = {
     nav: root.querySelectorAll("[data-nav]"),
