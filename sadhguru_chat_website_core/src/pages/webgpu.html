@@ -1,0 +1,14 @@
+<section class="view" data-view="webgpu" hidden>
+  <h1 class="page-title">Browser chat &amp; WebGPU</h1>
+  <div class="prose">
+    <p>
+      WebLLM loads a quantized model into your browser. The first load can take time and disk space; later visits reuse the cache.
+    </p>
+    <p>
+      A recent Chromium browser with <strong>WebGPU</strong> enabled is strongly recommended. Firefox and Safari support is evolving — if loading fails, use the CLI path instead.
+    </p>
+    <p>
+      Security headers (<code>Cross-Origin-Opener-Policy</code> and <code>Cross-Origin-Embedder-Policy</code>) are set in the Vite dev server so WebLLM can use shared memory where needed.
+    </p>
+  </div>
+</section>

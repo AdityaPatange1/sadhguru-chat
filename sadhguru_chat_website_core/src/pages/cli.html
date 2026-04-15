@@ -1,0 +1,22 @@
+<section class="view" data-view="cli" hidden>
+  <h1 class="page-title">CLI &amp; Ollama</h1>
+  <div class="prose">
+    <p>Install Python dependencies (see the repo <code>requirements.txt</code>), set Ollama env vars, then:</p>
+    <pre class="code-block"><code># One-shot question
+python sadhguru_chat.py --question "What is inner engineering?"
+
+# Interactive session
+python sadhguru_chat.py --interactive
+
+# Optional styles (CLI only)
+python sadhguru_chat.py --interactive --opc
+python sadhguru_chat.py --interactive --sans
+
+# Choose a model id known to your Ollama server
+python sadhguru_chat.py --question "Hello" --model llama3</code></pre>
+    <p>
+      <code>--opc</code> enables “Yogic Code” (playful compressed phrasing). <code>--sans</code> asks for a Sanskrit + Tamil blend with English gloss.
+      These modes extend the base prompt defined in <code>sadhguru_chat.py</code>.
+    </p>
+  </div>
+</section>

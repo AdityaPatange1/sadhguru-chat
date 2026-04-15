@@ -1,0 +1,145 @@
+<section class="view view--landing" data-view="landing" id="landing-main">
+  <div class="landing">
+    <div class="landing__hero landing__hero--content landing__band--parallax">
+      <div class="landing__parallax-bg" aria-hidden="true">
+        <span class="landing__orb landing__orb--1"></span>
+        <span class="landing__orb landing__orb--2"></span>
+        <span class="landing__orb landing__orb--3"></span>
+      </div>
+      <div class="landing__hero-inner">
+        <p class="landing__eyebrow">Sadhguru Chat · SPA · CLI &amp; browser</p>
+        <h1 class="landing__title">A quiet space for questions that matter</h1>
+        <p class="landing__subtitle">
+          This site introduces a small AI-assisted project: a <strong>Python CLI</strong> that talks to models through
+          <strong>Ollama</strong>, and a <strong>vanilla web app</strong> where you can try a Sadhguru-style dialogue
+          in your browser with <strong>WebLLM</strong> (WebGPU). Same intention — different runtimes.
+        </p>
+        <div class="landing__cta">
+          <button type="button" class="btn btn--primary" data-nav="home">Open Home &amp; chat</button>
+          <button type="button" class="btn btn--ghost" data-jump="landing-overview">Read the overview</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="landing__section landing__band--parallax landing__band landing__band--soft" id="landing-overview">
+      <div class="landing__section-inner landing__reveal">
+        <h2 class="landing__h2">What you’ll find here</h2>
+        <p class="landing__lead">
+          The repository pairs a terminal workflow for power users with a no-backend web demo. You choose: remote
+          Ollama models with your own keys, or fully local inference in Chromium via WebLLM — no account on this site.
+        </p>
+        <ul class="landing__list">
+          <li><strong>Documentation SPA</strong> — Hash routes (<code>#/landing</code>, <code>#/home</code>, …) swap views without a full reload.</li>
+          <li><strong>Home</strong> — Short intro plus the WebLLM chat panel and quick-reference cards.</li>
+          <li><strong>The app / CLI / WebGPU</strong> — Deeper notes mirrored from the Python tool and browser stack.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="landing__section" id="landing-features">
+      <div class="landing__section-inner landing__reveal">
+        <h2 class="landing__h2">Features</h2>
+        <div class="landing__features">
+          <article class="landing__feature">
+            <h3 class="landing__h3">Sadhguru voice (system prompt)</h3>
+            <p>Replies aim for depth, metaphor, and inward focus — not generic assistant tone. The same core prompt drives CLI and web.</p>
+          </article>
+          <article class="landing__feature">
+            <h3 class="landing__h3">CLI + Ollama</h3>
+            <p>Ask once or stay in a REPL-style loop. Point <code>OLLAMA_HOST</code> at your server and pass <code>--model</code> to match a tag your Ollama knows.</p>
+          </article>
+          <article class="landing__feature">
+            <h3 class="landing__h3">Optional CLI modes</h3>
+            <p><code>--opc</code> “yogic code” phrasing; <code>--sans</code> Sanskrit–Tamil blend with English gloss (CLI only).</p>
+          </article>
+          <article class="landing__feature">
+            <h3 class="landing__h3">WebLLM in the tab</h3>
+            <p>Pick a bundled MLC model, load weights once, then chat offline in spirit — data stays on-device after download.</p>
+          </article>
+          <article class="landing__feature">
+            <h3 class="landing__h3">Vite + npm</h3>
+            <p>The UI is packaged with npm scripts; local dev uses headers that satisfy WebLLM’s COOP/COEP needs.</p>
+          </article>
+          <article class="landing__feature">
+            <h3 class="landing__h3">Single Page App</h3>
+            <p>One HTML shell, client-side routing, and lazy-loaded WebLLM so first paint stays light.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing__section landing__band landing__band--dark">
+      <div class="landing__section-inner landing__reveal">
+        <h2 class="landing__h2 landing__h2--on-dark">Run the Python CLI</h2>
+        <ol class="landing__steps">
+          <li>Clone the repo and open a terminal at the project root.</li>
+          <li>Create a virtual environment, then <code>pip install -r requirements.txt</code> (includes <code>ollama</code>, <code>python-dotenv</code>, <code>rich</code>).</li>
+          <li>Set <code>OLLAMA_HOST</code> and <code>OLLAMA_API_KEY</code> in a <code>.env</code> file (see <code>sadhguru_chat.py</code>).</li>
+          <li>Ensure your Ollama server exposes the model you pass with <code>--model</code> (default in code may be <code>gpt-oss:20b</code> — adjust to what you host).</li>
+          <li>Run <code>python sadhguru_chat.py --question "…"</code> or <code>--interactive</code>.</li>
+        </ol>
+        <p class="landing__note landing__note--on-dark">
+          Tip: use <code>--opc</code> or <code>--sans</code> only when you want those experimental prompt modes.
+        </p>
+      </div>
+    </section>
+
+    <section class="landing__section landing__band--parallax landing__band landing__band--mist">
+      <div class="landing__section-inner landing__reveal">
+        <h2 class="landing__h2">Run this website locally</h2>
+        <p class="landing__lead">From the repository root, the Makefile installs dependencies and starts the Vite dev server:</p>
+        <pre class="code-block code-block--inline"><code>make start-web</code></pre>
+        <p class="landing__lead">Equivalent:</p>
+        <pre class="code-block code-block--inline"><code>cd sadhguru_chat_website_core
+npm install
+npm run dev</code></pre>
+        <p class="landing__lead">
+          Then open the printed URL (typically <code>http://localhost:5173/</code>). Use <strong>Home</strong> for WebLLM chat;
+          first model load can take a while and uses significant disk in the browser cache.
+        </p>
+      </div>
+    </section>
+
+    <section class="landing__section" id="landing-requirements">
+      <div class="landing__section-inner landing__reveal">
+        <h2 class="landing__h2">What you need</h2>
+        <div class="landing__table-wrap">
+          <table class="landing__table">
+            <thead>
+              <tr>
+                <th scope="col">Piece</th>
+                <th scope="col">CLI path</th>
+                <th scope="col">Web path</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Runtime</td>
+                <td>Python 3, Ollama reachable at <code>OLLAMA_HOST</code></td>
+                <td>Modern Chromium with <strong>WebGPU</strong></td>
+              </tr>
+              <tr>
+                <td>Auth</td>
+                <td><code>OLLAMA_API_KEY</code> if your host requires it</td>
+                <td>None for this demo (models download from public MLC endpoints)</td>
+              </tr>
+              <tr>
+                <td>Build</td>
+                <td><code>pip install -r requirements.txt</code></td>
+                <td><code>npm install</code> inside <code>sadhguru_chat_website_core/</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing__closing landing__reveal">
+      <p class="landing__closing-text">When you’re ready, switch to <strong>Home</strong> for the live WebLLM panel — or use the tabs above for focused docs.</p>
+      <div class="landing__cta">
+        <button type="button" class="btn btn--primary" data-nav="home">Go to Home</button>
+        <button type="button" class="btn btn--ghost" data-nav="guide">The app</button>
+      </div>
+    </section>
+  </div>
+</section>

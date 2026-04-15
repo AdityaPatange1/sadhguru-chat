@@ -1,0 +1,17 @@
+<section class="view" data-view="guide" hidden>
+  <h1 class="page-title">What this project is</h1>
+  <div class="prose">
+    <p>
+      <strong>Sadhguru Chat</strong> is a small Python program that sends your questions to a large language model
+      with a fixed <em>system prompt</em> so replies read like Sadhguru Jaggi Vasudev: poetic, grounded, and inward-pointing.
+    </p>
+    <p>
+      The CLI uses <strong>Ollama</strong> (with <code>OLLAMA_HOST</code> and <code>OLLAMA_API_KEY</code> from your environment)
+      so you can pick any model your server exposes — for example <code>gpt-oss:20b</code> as a default.
+    </p>
+    <p>
+      This website is a <strong>single-page app</strong>: navigation swaps content without reloading the page.
+      The chat card on Home uses <strong>WebLLM</strong> so inference happens in your tab via WebGPU, not on our servers.
+    </p>
+  </div>
+</section>

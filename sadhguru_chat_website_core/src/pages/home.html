@@ -1,0 +1,56 @@
+<section class="view" data-view="home" hidden>
+  <div class="hero">
+    <h1 class="hero__headline">Stillness you can speak with</h1>
+    <p class="hero__lede">
+      A calm, contemplative chat experience styled after Sadhguru’s voice — available as a Python CLI
+      through Ollama, or privately in your browser with <strong>WebLLM</strong> (WebGPU).
+    </p>
+  </div>
+
+  <div id="webgpu-banner" class="banner banner--warn" hidden>
+    <strong>No WebGPU detected.</strong> WebLLM needs WebGPU (e.g. Chrome/Edge on desktop). You can still read the docs using the navigation above.
+  </div>
+
+  <section class="panel chat-panel" aria-labelledby="chat-heading">
+    <div class="panel__head">
+      <h2 id="chat-heading" class="panel__title">Chat with Sadhguru (WebLLM)</h2>
+      <p class="panel__sub">Runs locally in your browser after the model downloads. No server, no API key.</p>
+    </div>
+
+    <div class="chat-controls">
+      <label class="field">
+        <span class="field__label">Model</span>
+        <select id="model-select" class="field__input"></select>
+      </label>
+      <button type="button" id="load-engine" class="btn btn--primary">Load model</button>
+    </div>
+    <div class="load-line">
+      <progress id="load-progress" max="100" value="0"></progress>
+      <span id="load-progress-text" class="load-line__text"></span>
+    </div>
+    <p id="engine-status" class="status" data-kind="muted"></p>
+
+    <div id="chat-messages" class="chat-messages" role="log" aria-live="polite"></div>
+
+    <form id="chat-form" class="chat-form">
+      <label class="visually-hidden" for="chat-input">Your message</label>
+      <textarea id="chat-input" class="chat-input" rows="2" placeholder="What is calling you within?" disabled></textarea>
+      <button type="submit" id="chat-send" class="btn btn--accent" disabled>Send</button>
+    </form>
+  </section>
+
+  <div class="grid grid--3">
+    <article class="card">
+      <h3 class="card__title">Two front doors</h3>
+      <p class="card__text">Use the <strong>CLI</strong> with your own Ollama host for full-strength models, or the <strong>web</strong> client here for private, in-browser inference.</p>
+    </article>
+    <article class="card">
+      <h3 class="card__title">Same intention</h3>
+      <p class="card__text">Both paths share a carefully written system prompt: reflective tone, experiential wisdom, and a gentle challenge to look inward.</p>
+    </article>
+    <article class="card">
+      <h3 class="card__title">Yours to explore</h3>
+      <p class="card__text">Optional CLI modes add playful “yogic code” or Sanskrit–Tamil blending. The web demo keeps the core voice for a fast, clear experience.</p>
+    </article>
+  </div>
+</section>
