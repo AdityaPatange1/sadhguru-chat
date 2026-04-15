@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://i.ibb.co/hRssZRmm/Screenshot-2026-04-15-at-8-56-55-AM.png" alt="Sadhguru Chat — landing page with hero, navigation, and theme controls" width="100%" />
+  <img src="https://i.ibb.co/hRssZRmm/Screenshot-2026-04-15-at-8-56-55-AM.png" alt="Sadhguru Flow — landing page with hero, navigation, and theme controls" width="100%" />
 </p>
 
-<h1 align="center">Sadhguru Chat</h1>
+<h1 align="center">Sadhguru Flow</h1>
 
 <p align="center">
   <em>A quiet space for questions that matter.</em><br />
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/AdityaPatange1/sadhguru-chat">Repository</a>
+  <a href="https://github.com/AdityaPatange1/sadhguru-flow">Repository</a>
   ·
   <a href="#usage">Usage</a>
   ·
@@ -21,7 +21,7 @@
 
 ## Overview
 
-**Sadhguru Chat** is a small project that wraps large-language-model calls in a fixed **system prompt** so replies read like **Sadhguru Jaggi Vasudev**: poetic, grounded, inward-looking, and never generic. You can run it as a **terminal client** against your own **Ollama** server, or explore the same intention in the **browser** using **[WebLLM](https://webllm.mlc.ai/)** (WebGPU) — no API keys for the local web demo, no page reloads for navigation.
+**Sadhguru Flow** is a small project that wraps large-language-model calls in a fixed **system prompt** so replies read like **Sadhguru Jaggi Vasudev**: poetic, grounded, inward-looking, and never generic. You can run it as a **terminal client** against your own **Ollama** server, or explore the same intention in the **browser** using **[WebLLM](https://webllm.mlc.ai/)** (WebGPU) — no API keys for the local web demo, no page reloads for navigation.
 
 | Path        | Best for                                                           |
 | ----------- | ------------------------------------------------------------------ |
@@ -51,7 +51,7 @@
 - **17 color themes** + **light / dark** mode, driven by `src/themes.json` (persisted in `localStorage`).
 - **HTML partials** in `src/pages/` assembled with a tiny `renderTemplate` helper (`{{ }}` / `{{{ }}}`).
 - **Vite** dev server with **COOP/COEP** headers for WebLLM.
-- Links to **[source on GitHub](https://github.com/AdityaPatange1/sadhguru-chat)** in the footer and throughout the copy.
+- Links to **[source on GitHub](https://github.com/AdityaPatange1/sadhguru-flow)** in the footer and throughout the copy.
 
 ---
 
@@ -83,8 +83,8 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/AdityaPatange1/sadhguru-chat.git
-cd sadhguru-chat
+git clone https://github.com/AdityaPatange1/sadhguru-flow.git
+cd sadhguru-flow
 ```
 
 ### 2. Python CLI
@@ -159,7 +159,7 @@ npm run generate-themes
 ## Project structure
 
 ```
-sadhguru-chat/
+sadhguru-flow/
 ├── sadhguru_chat.py          # CLI entrypoint
 ├── requirements.txt
 ├── Makefile                  # make start-web → Vite dev server
@@ -229,5 +229,5 @@ This is an **educational / exploratory** interface. It is **not affiliated with*
 ---
 
 <p align="center">
-  Built with loving-friendliness (metta)  · <a href="https://github.com/AdityaPatange1/sadhguru-chat">github.com/AdityaPatange1/sadhguru-chat</a> for our people and the world.
+  Built with loving-friendliness (metta)  · <a href="https://github.com/AdityaPatange1/sadhguru-flow">github.com/AdityaPatange1/sadhguru-flow</a> for our people and the world.
 </p>

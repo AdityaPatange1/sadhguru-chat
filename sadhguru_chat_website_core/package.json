@@ -1,9 +1,9 @@
 {
-  "name": "sadhguru-chat-website-core",
+  "name": "sadhguru-flow-website-core",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Vanilla SPA for Sadhguru Chat with in-browser WebLLM",
+  "description": "Vanilla SPA for Sadhguru Flow with in-browser WebLLM",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

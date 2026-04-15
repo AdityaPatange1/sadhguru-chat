@@ -1,7 +1,7 @@
 import themesConfig from "./themes.json";
 
-const STORAGE_THEME = "sadhguru-chat-theme-id";
-const STORAGE_MODE = "sadhguru-chat-color-mode";
+const STORAGE_THEME = "sadhguru-flow-theme-id";
+const STORAGE_MODE = "sadhguru-flow-color-mode";
 
 /**
  * Apply palette from themes.json, wire navbar toggle + theme picker.
