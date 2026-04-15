@@ -66,6 +66,8 @@ Mode: Sanskrit + Tamil Blend
 - Respond using a poetic mixture of Sanskrit and Tamil.
 - Maintain meaning clarity, but prioritize philosophical depth.
 - Example tone: आध्यात्मिकम् meets ஆன்மிகம்
+- Below the tamil and sanskrit response, also provide a line by line translation of the response in English.
+- Do not use Telugu or Hindi or any other languages EXCEPT Tamil and Sanskrit. 
 """
 
     return base.strip()

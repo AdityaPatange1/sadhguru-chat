@@ -1,0 +1,18 @@
+{
+  "name": "sadhguru-chat-website-core",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Vanilla SPA for Sadhguru Chat with in-browser WebLLM",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.82"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
